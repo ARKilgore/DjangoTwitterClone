@@ -2,22 +2,27 @@ Meera’s MacBook Air (4):~ meerahahn$ telnet dutch.mathcs.emory.edu 80
 Trying 170.140.150.171...
 Connected to dutch.mathcs.emory.edu.
 Escape character is '^]'.
-GET ~mhahn7/ HE TTP/1.0
-HTTP/1.1 408 Request Time-out
-Date: Fri, 23 Jan 2015 19:01:55 GMT
-Server: Apache/2.2.22 (Ubuntu)
-Vary: Accept-Encoding
-Content-Length: 311
-Connection: close
-Content-Type: text/html; charset=iso-8859-1
+GET /~mhahn7/ HTTP/1.0
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-<html><head>
-<title>408 Request Time-out</title>
-</head><body>
-<h1>Request Time-out</h1>
-<p>Server timeout waiting for the HTTP request from the client.</p>
-<hr>
-<address>Apache/2.2.22 (Ubuntu) Server at dutch.mathcs.emory.edu Port 80</address>
-</body></html>
+HTTP/1.1 200 OK
+Date: Fri, 23 Jan 2015 19:43:11 GMT
+Server: Apache/2.2.22 (Ubuntu)
+Last-Modified: Fri, 23 Jan 2015 18:58:06 GMT
+ETag: "540022-83-50d565e78ed84"
+Accept-Ranges: bytes
+Content-Length: 131
+Vary: Accept-Encoding
+Connection: close
+Content-Type: text/html
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Twitter Clone</title>
+</head>
+<body>
+<h1>Twitter Feed</h1>
+<p>statuses...</p>
+</body>
+</html>
 Connection closed by foreign host.
