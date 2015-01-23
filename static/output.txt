@@ -1,0 +1,24 @@
+akilgo2@dutch:~/DjangoTwitterClone$ telnet dutch.mathcs.emory.edu 80
+Trying 170.140.150.171...
+Connected to dutch.mathcs.emory.edu.
+Escape character is '^]'.
+
+GET ~akilgo2/ HE TTP/1.0
+HTTP/1.1 408 Request Time-out
+Date: Fri, 23 Jan 2015 19:00:03 GMT
+Server: Apache/2.2.22 (Ubuntu)
+Vary: Accept-Encoding
+Content-Length: 311
+Connection: close
+Content-Type: text/html; charset=iso-8859-1
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>408 Request Time-out</title>
+</head><body>
+<h1>Request Time-out</h1>
+<p>Server timeout waiting for the HTTP request from the client.</p>
+<hr>
+<address>Apache/2.2.22 (Ubuntu) Server at dutch.mathcs.emory.edu Port 80</address>
+</body></html>
+Connection closed by foreign host.
