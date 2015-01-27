@@ -27,7 +27,7 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-8"style="text-align:center">
                         <h1>Welcome to notTwitter</h1>
-                                <form action="{% url 'tweet' twit_text='twit_text' twit_name='twit_name'  %}" method="post">
+                                <form action="{% url 'tweet' twit_text='twit_text' twit_name='twit_name'  %}" method="POST">
                                         {% csrf_token %}
                                         <input id="twit_text" class="form-control" type="text" placeholder="tweet" ></input>
                                         <input id="twit_name" class="form-control" type="text" placeholder="username"></input>
