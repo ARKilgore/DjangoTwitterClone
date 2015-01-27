@@ -27,12 +27,7 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-8"style="text-align:center">
                         <h1>Welcome to notTwitter</h1>
-                                <form action="{% url 'tweet' twit_text='twit_text' twit_name='twit_name'  %}" method="POST">
-                                        {% csrf_token %}
-                                        <input id="twit_text" class="form-control" type="text" placeholder="tweet" ></input>
-                                        <input id="twit_name" class="form-control" type="text" placeholder="username"></input>
-                                        <input type="submit" value="tweet" class="btn btn-primary" style="margin-top:10px">
-                                </form>
+                                
                         <!--<button class="btn btn-primary"><a style="color:white" href="http://dutch.mathcs.emory.edu/~mhahn7/status.html">Tweet!</a></button>-->
                 </div>
                 <div class="col-md-2"></div>
