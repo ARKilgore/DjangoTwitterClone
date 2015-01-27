@@ -28,10 +28,12 @@ def detail(request, twit_id):
         response.write("<br>")
     return response
 
-def tweet(request, twit_text, twit_name):
-    t = Tweet(text = twit_text, date = timezone.now(), name=twit_name)
+def tweet(request):
+    t = Tweet(text=request.POST.get('twit_text', False), date = timezone.now(), name=request.POST.get('twit_name', False))
     t.save()
-    return HttpResponseRedirect(reverse('twit/index.html'))
+    t = Tweet(text='reid', date = timezone.now(), name='aaaaa')
+    t.save()
+    return HttpResponseRedirect('index')
 '''
     def add(request, n_name, n_text):
     t = Tweet(text = n_text, date=timezone.now(), name=n_name)
