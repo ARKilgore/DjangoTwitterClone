@@ -28,10 +28,10 @@ def detail(request, twit_id):
                 response.write("<br>")
         return response
 
-def tweet(request, twit_text, twit_name):
-        t = Tweet(text = twit_text, date = timezone.now(), name=twit_name)
+def tweet(request):
+        t = Tweet(text = request.POST.get('twit_text',False), date = timezone.now(), name=request.POST.get('twit_name',False))
         t.save()
-        return HttpResponseRedirect('twit/index.html')
+        return HttpResponseRedirect('/twit')
 '''
 def add(request, n_name, n_text):
         t = Tweet(text = n_text, date=timezone.now(), name=n_name)
@@ -39,11 +39,9 @@ def add(request, n_name, n_text):
         index(request)
     t = Tweet(text = twit_text, date = timezone.now(), name=twit_name)
     t.save()
-    return HttpResponseRedirect(reverse('twit/index.html'))
+    return HttpResponseRedirect('/twit')
 '''
-    def add(request, n_name, n_text):
+def add(request, n_name, n_text):
     t = Tweet(text = n_text, date=timezone.now(), name=n_name)
     t.save()
     index(request)
->>>>>>> facc99dcf709c2c4f3ff005bf567abe147a618b6
-'''
