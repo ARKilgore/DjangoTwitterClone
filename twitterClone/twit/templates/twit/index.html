@@ -1,0 +1,66 @@
+<html>
+<head>
+        <title>(not)Twitter</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+<!--HEADER-->
+        
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class = "container">
+                        <div class = ".navbar-header">
+                                <a class="navbar-brand" href= "http://www.reidkilgore.me" >R/M</a>
+                        </div>
+                                <div class = "navbar-header navbar-right">
+                                        <a class="navbar-brand"href="https://github.com/ARKilgore/DjangoTwitterClone">notTwitter</a>
+					</div>
+                        </div>
+                </div>
+        </nav>
+<!--END HEADER-->
+
+        <div class="content container" style="margin-top:50px" >
+                <div class="col-md-2"></div>
+                <div class="col-md-8"style="text-align:center">
+                        <h1>Welcome to notTwitter</h1>
+                                <form action="{% url 'tweet' twit_text='twit_text' twit_name='twit_name'  %}" method="post">
+                                        {% csrf_token %}
+                                        <input id="twit_text" class="form-control" type="text" placeholder="tweet" ></input>
+                                        <input id="twit_name" class="form-control" type="text" placeholder="username"></input>
+                                        <input type="submit" value="tweet" class="btn btn-primary" style="margin-top:10px">
+                                </form>
+                        <!--<button class="btn btn-primary"><a style="color:white" href="http://dutch.mathcs.emory.edu/~mhahn7/status.html">Tweet!</a></button>-->
+                </div>
+                <div class="col-md-2"></div>
+                </div>
+                <br>    
+        <div class = "content container" style="margin-top:10px">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8"style="text-align:center">
+                        {% if twit_list %}
+                        {% for twit in twit_list %}
+                                <div class="well well-lg">
+                                        <h3>
+                                                <strong class="pull-left">
+                                                        {{ twit.text }}
+                                                </strong>
+                                                <br>
+                                                <em class="pull-right">--{{ twit.name }}</em>
+                                                <br>
+                                        </h3>
+                                </div>
+                                <br>
+                        {% endfor %}
+                        </ul>
+                        {% else %}
+                        <h1>There are no tweets!</h1>
+                        {% endif %}
+                </div>
+        </div>
+</body>
+</html>
