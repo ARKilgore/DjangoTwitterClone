@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from twit.models import Tweet
 from django.utils import timezone
 from django.template import RequestContext, loader
@@ -8,11 +9,6 @@ from django.template import RequestContext, loader
 
 def index(request):
     #username = request.POST['username']
-    '''
-    t = Tweet(text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eu nisl vulputate, dapibus arcu a.",
-        date=timezone.now(), name="James D.")
-    t.save()
-    '''
     twit_list = Tweet.objects.order_by('-date')[:10]
     context = { 'twit_list' : twit_list }
     return render(request, 'twit/index.html', context)
@@ -31,6 +27,11 @@ def detail(request, twit_id):
                 response.write(i.text)
                 response.write("<br>")
         return response
+
+def tweet(request, twit_text, twit_name):
+        t = Tweet(text = twit_text, date = timezone.now(), name=twit_name)
+        t.save()
+        return HttpResponseRedirect(reverse('/index.html'))
 '''
 def add(request, n_name, n_text):
         t = Tweet(text = n_text, date=timezone.now(), name=n_name)
