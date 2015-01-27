@@ -37,4 +37,13 @@ def add(request, n_name, n_text):
         t = Tweet(text = n_text, date=timezone.now(), name=n_name)
         t.save()
         index(request)
+    t = Tweet(text = twit_text, date = timezone.now(), name=twit_name)
+    t.save()
+    return HttpResponseRedirect(reverse('twit/index.html'))
+'''
+    def add(request, n_name, n_text):
+    t = Tweet(text = n_text, date=timezone.now(), name=n_name)
+    t.save()
+    index(request)
+>>>>>>> facc99dcf709c2c4f3ff005bf567abe147a618b6
 '''
