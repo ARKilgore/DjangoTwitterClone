@@ -31,7 +31,7 @@ def detail(request, twit_id):
 def tweet(request, twit_text, twit_name):
         t = Tweet(text = twit_text, date = timezone.now(), name=twit_name)
         t.save()
-        return HttpResponseRedirect(reverse('twit/index.html'))
+        return HttpResponseRedirect('twit/index.html')
 '''
 def add(request, n_name, n_text):
         t = Tweet(text = n_text, date=timezone.now(), name=n_name)
