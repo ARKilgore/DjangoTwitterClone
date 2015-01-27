@@ -13,28 +13,34 @@ def index(request):
     context = { 'twit_list' : twit_list }
     return render(request, 'twit/index.html', context)
     '''
-    for i in Tweet.objects.all():
+        for i in Tweet.objects.all():
         response.write("<br>")
         response.write(i.name + " said " + i.text + ": sent at ")
         response.write(i.date)
-    return response
+        return response
     '''
 
 def detail(request, twit_id):
-        response = HttpResponse()
-        count = 0;
-        for i in Tweet.objects.all():
-                response.write(i.text)
-                response.write("<br>")
-        return response
+    response = HttpResponse()
+    count = 0;
+    for i in Tweet.objects.all():
+        response.write(i.text)
+        response.write("<br>")
+    return response
 
 def tweet(request, twit_text, twit_name):
+<<<<<<< HEAD
         t = Tweet(text = twit_text, date = timezone.now(), name=twit_name)
         t.save()
         return HttpResponseRedirect('twit/index.html')
+=======
+    t = Tweet(text = twit_text, date = timezone.now(), name=twit_name)
+    t.save()
+    return HttpResponseRedirect(reverse('twit/index.html'))
+>>>>>>> FETCH_HEAD
 '''
-def add(request, n_name, n_text):
-        t = Tweet(text = n_text, date=timezone.now(), name=n_name)
-        t.save()
-        index(request)
+    def add(request, n_name, n_text):
+    t = Tweet(text = n_text, date=timezone.now(), name=n_name)
+    t.save()
+    index(request)
 '''
