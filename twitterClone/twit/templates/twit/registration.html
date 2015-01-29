@@ -27,20 +27,27 @@
         <div class="content container" style="margin-top:50px" >
                 <div class="col-md-2"></div>
                 <div class="col-md-8"style="text-align:center">
-                        <h1>Welcome to notTwitter</h1>
+                        <h1>Register for notTwitter</h1>
                     <br>
-                             <h3>Register for notTwitter</h3>
-                                <form action="{% url 'register'  %}" method="POST">
-                                       {% csrf_token %}
-                                        <input name="first_name" class="form-control" type="text" placeholder="First Name" ></input>
-                                        <input name="last_name" class="form-control" type="text" placeholder="Last Name" ></input>
-                                        <input name="user_name" class="form-control" type="text" placeholder="Username" ></input>
-                                        <input name="email" class="form-control" type="text" placeholder="Email Address"></input>
-                                        <input name="password1" class="form-control" type="text" placeholder="Password"></input>
-                                        <input name="password2" class="form-control" type="text" placeholder="Confirm Password"></input>
-                                        <input type="submit" value="Register" class="btn btn-primary" style="margin-top:10px">
-                                </form>
+
+
+                    
+                                    <form class="form-horizontal" role="form" method="post">
+                                    {% csrf_token %}
+                                    {% for field in form %}
+                                    <div class="form-group">
+                                    <table>
+                                    <label for="{{ field.id_for_label }}" class="col-sm-3 text-right control-lable">{{ field.label_tag }}</label>
+                                    <tr>
+                                    <td>{{ field }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    </table>  
+                                        <br>
+                                    <button class="btn btn-primary" type="submit">Register!</button>
                         <br>
+                        <br>
+                                        
                 <a class="btn" href="{% url 'signin' %}">Cancel and Return to Login</a>
 
                 </div>
