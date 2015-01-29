@@ -1,0 +1,51 @@
+<html>
+<head>
+        <title>(not)Twitter</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+<!--HEADER-->
+        
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class = "container">
+                        <div class = ".navbar-header">
+                                <a class="navbar-brand" >R/M</a>
+                        </div>
+
+                                <div class = "navbar-header navbar-right">
+                                        <a class="navbar-brand"href="https://github.com/ARKilgore/DjangoTwitterClone">notTwitter</a>
+					</div>
+                        </div>
+                </div>
+        </nav>
+<!--END HEADER-->
+
+        <div class="content container" style="margin-top:50px" >
+                <div class="col-md-2"></div>
+                <div class="col-md-8"style="text-align:center">
+                        <h1>Welcome to notTwitter</h1>
+                    <br>
+                             <h3>Register for notTwitter</h3>
+                                <form action="{% url 'register'  %}" method="POST">
+                                       {% csrf_token %}
+                                        <input name="first_name" class="form-control" type="text" placeholder="First Name" ></input>
+                                        <input name="last_name" class="form-control" type="text" placeholder="Last Name" ></input>
+                                        <input name="user_name" class="form-control" type="text" placeholder="Username" ></input>
+                                        <input name="email" class="form-control" type="text" placeholder="Email Address"></input>
+                                        <input name="password1" class="form-control" type="text" placeholder="Password"></input>
+                                        <input name="password2" class="form-control" type="text" placeholder="Confirm Password"></input>
+                                        <input type="submit" value="Register" class="btn btn-primary" style="margin-top:10px">
+                                </form>
+                        <br>
+                <a class="btn" href="{% url 'signin' %}">Cancel and Return to Login</a>
+
+                </div>
+                <div class="col-md-2"></div>
+                </div>
+                <br>
+</body>
+</html>

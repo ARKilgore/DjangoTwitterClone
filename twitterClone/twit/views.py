@@ -4,8 +4,54 @@ from django.core.urlresolvers import reverse
 from twit.models import Tweet
 from django.utils import timezone
 from django.template import RequestContext, loader
+from django.contrib.auth import authenticate, login
+from TwitterApp.forms import *
+from TwitterApp.models import *
+from django.contrib.auth import authenticate, login, logout, get_user
+from django.contrib.auth.decorators import login_required, user_passes_test
+from forms import *
+from django.shortcuts import get_object_or_404
 
+def auth_login(request):
+    context = {}
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+    else:
+        form = LoginForm()
+    if form.is_valid() and 'email' in form.cleaned_data and 'password' in form.cleaned_data:
+        user = authenticate(username=form.cleaned_data['email'], password=form.cleaned_data['password'])
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect(reverse('index'))  # Redirect to homepage when the user logs in
+        else:
+            context['errors'] = 'Authentication failed.'
+    context['form'] = form
+    return render_to_response('signin.html', context, context_instance=RequestContext(request))
 
+def signup(request):
+    context = {}
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+    else:
+        form = RegisterForm()
+    if form.is_valid():
+        context['form'] = form
+        # Passwords don't match
+        if form.cleaned_data['password'] != form.cleaned_data['retype_password']:
+            context['errors'] = 'The passwords you entered do not match.'
+            return render(request, 'register.html', context)
+        # A user already exists with this email
+        if SiteUser.objects.filter(email=form.cleaned_data['email']).count():
+            context['errors'] = 'A user already exists with this email.'
+            return render(request, 'register.html', context)
+        email = form.cleaned_data['email']
+        password = form.clean_retype_password()
+        form.save()
+        user = authenticate(email=email, password=password)
+        login(request, user) # Log the user in
+        return HttpResponseRedirect(reverse('index')) # Redirect them to the home page
+    context['form'] = form
+    return render(request, 'register.html', context)
 
 def index(request):
     #username = request.POST['username']
@@ -32,15 +78,7 @@ def tweet(request):
         t = Tweet(text = request.POST.get('twit_text',False), date = timezone.now(), name=request.POST.get('twit_name',False))
         t.save()
         return HttpResponseRedirect('/twit')
-'''
-def add(request, n_name, n_text):
-        t = Tweet(text = n_text, date=timezone.now(), name=n_name)
-        t.save()
-        index(request)
-    t = Tweet(text = twit_text, date = timezone.now(), name=twit_name)
-    t.save()
-    return HttpResponseRedirect('/twit')
-'''
+
 def add(request, n_name, n_text):
     t = Tweet(text = n_text, date=timezone.now(), name=n_name)
     t.save()
