@@ -29,18 +29,17 @@
                 <div class="col-md-8"style="text-align:center">
                         <h1>Welcome to notTwitter</h1>
                     <br>
-                             <h3>Register for notTwitter</h3>
-                                <form action="{% url 'signup'  %}" method="POST">
+                             <h3>Login to notTwitter</h3>
+                                    <form action="{% url 'login'  %}" method="POST">
                                        {% csrf_token %}
-                                        <input name="Username" class="form-control" type="text" placeholder="Username" ></input>
-                                        <input name="Email" class="form-control" type="text" placeholder="Email Address"></input>
-                                        <input name="Password" class="form-control" type="text" placeholder="Password"></input>
-                                        <input name="password2" class="form-control" type="text" placeholder="Confirm Password"></input>
-                                        <input type="submit" value="Register" class="btn btn-primary" style="margin-top:10px">
-                                </form>
-                        <br>
-                <a class="btn" href="{% url 'login' %}">Cancel and Return to </a>
-
+                                        <input name="user_name" class="form-control" type="text" placeholder="Username" ></input>
+                                        <input name="password" class="form-control" type="text" placeholder="Password"></input>
+                                        <input type="submit" value="Login" class="btn btn-primary" style="margin-top:10px">
+                                    </form>
+                                        <br>
+                                        <br>
+                                        <br>
+                <a href="{% url 'register' %}" class="btn btn-primary">Sign Up for notTwitter!</a>
                 </div>
                 <div class="col-md-2"></div>
                 </div>

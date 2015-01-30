@@ -31,24 +31,24 @@ from django.shortcuts import get_object_or_404
 
 
 def index(request):
-    return render(request, 'twit/registration.html')
-
-
-def signup(request):
-    user = User.objects.create_user(request.POST.get('Username',False), request.POST.get('Email',False), request.POST.get('Password',False))
-    user.save()
-    twit_list = Tweet.objects.order_by('-date')[:10]
-    context = { 'twit_list' : twit_list }
-    return render(request, 'twit/index.html', context)
+    return render(request, 'twit/login.html')
 
 def login(request):
-    user = authenticate(username=request.POST.get('Username',False), request.POST.get('Password',False))
+    user = authenticate(username=request.POST.get('user_name',False), password=request.POST.get('password',False))
     if user is not None:
         twit_list = Tweet.objects.order_by('-date')[:10]
         context = { 'twit_list' : twit_list }
         return render(request, 'twit/index.html', context)
     else:
+        return render(request, 'twit/login.html')
 
+def register(request):
+    return render(request, 'twit/registration.html')
+
+def signup(request):
+    user = User.objects.create_user(request.POST.get('Username',False), request.POST.get('Email',False), request.POST.get('Password',False))
+    user.save()
+    return render(request, 'twit/login.html')
 
 '''def signup(request):
     context = {}
@@ -98,7 +98,7 @@ def detail(request, twit_id):
 def tweet(request):
         t = Tweet(text = request.POST.get('twit_text',False), date = timezone.now(), name=request.POST.get('twit_name',False))
         t.save()
-        return HttpResponseRedirect('/twit')
+        return HttpResponseRedirect('/twit/feed')
 
 def add(request, n_name, n_text):
     t = Tweet(text = n_text, date=timezone.now(), name=n_name)
