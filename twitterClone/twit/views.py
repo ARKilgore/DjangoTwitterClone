@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import authenticate, login, logout, get_user
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 from django.shortcuts import get_object_or_404
 
 '''def auth_login(request):
@@ -27,6 +28,8 @@ from django.shortcuts import get_object_or_404
     return render_to_response('twit/signin.html', context, context_instance=RequestContext(request))
 '''
 
+
+
 def index(request):
     return render(request, 'twit/registration.html')
 
@@ -37,6 +40,14 @@ def signup(request):
     twit_list = Tweet.objects.order_by('-date')[:10]
     context = { 'twit_list' : twit_list }
     return render(request, 'twit/index.html', context)
+
+def login(request):
+    user = authenticate(username=request.POST.get('Username',False), request.POST.get('Password',False))
+    if user is not None:
+        twit_list = Tweet.objects.order_by('-date')[:10]
+        context = { 'twit_list' : twit_list }
+        return render(request, 'twit/index.html', context)
+    else:
 
 
 '''def signup(request):
