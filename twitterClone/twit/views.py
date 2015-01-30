@@ -1,18 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from twit.models import Tweet
 from django.utils import timezone
+from twit.models import Tweet
 from django.template import RequestContext, loader
 from django.contrib.auth import authenticate, login
-from TwitterApp.forms import *
-from TwitterApp.models import *
 from django.contrib.auth import authenticate, login, logout, get_user
 from django.contrib.auth.decorators import login_required, user_passes_test
-from forms import *
+from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 
-def auth_login(request):
+'''def auth_login(request):
     context = {}
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -26,9 +24,22 @@ def auth_login(request):
         else:
             context['errors'] = 'Authentication failed.'
     context['form'] = form
-    return render_to_response('signin.html', context, context_instance=RequestContext(request))
+    return render_to_response('twit/signin.html', context, context_instance=RequestContext(request))
+'''
+
+def index(request):
+    return render(request, 'twit/registration.html')
+
 
 def signup(request):
+    user = User.objects.create_user(request.POST.get('Username',False), request.POST.get('Email',False), request.POST.get('Password',False))
+    user.save()
+    twit_list = Tweet.objects.order_by('-date')[:10]
+    context = { 'twit_list' : twit_list }
+    return render(request, 'twit/index.html', context)
+
+
+'''def signup(request):
     context = {}
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -39,11 +50,11 @@ def signup(request):
         # Passwords don't match
         if form.cleaned_data['password'] != form.cleaned_data['retype_password']:
             context['errors'] = 'The passwords you entered do not match.'
-            return render(request, 'register.html', context)
+            return render(request, 'twit/register.html', context)
         # A user already exists with this email
         if SiteUser.objects.filter(email=form.cleaned_data['email']).count():
             context['errors'] = 'A user already exists with this email.'
-            return render(request, 'register.html', context)
+            return render(request, 'twit/register.html', context)
         email = form.cleaned_data['email']
         password = form.clean_retype_password()
         form.save()
@@ -51,10 +62,9 @@ def signup(request):
         login(request, user) # Log the user in
         return HttpResponseRedirect(reverse('index')) # Redirect them to the home page
     context['form'] = form
-    return render(request, 'register.html', context)
-
-def index(request):
-    #username = request.POST['username']
+    return render(request, 'twit/register.html', context)
+'''
+def home(request):
     twit_list = Tweet.objects.order_by('-date')[:10]
     context = { 'twit_list' : twit_list }
     return render(request, 'twit/index.html', context)

@@ -27,28 +27,19 @@
         <div class="content container" style="margin-top:50px" >
                 <div class="col-md-2"></div>
                 <div class="col-md-8"style="text-align:center">
-                        <h1>Register for notTwitter</h1>
+                        <h1>Welcome to notTwitter</h1>
                     <br>
-
-
-                    
-                                    <form class="form-horizontal" role="form" method="post">
-                                    {% csrf_token %}
-                                    {% for field in form %}
-                                    <div class="form-group">
-                                    <table>
-                                    <label for="{{ field.id_for_label }}" class="col-sm-3 text-right control-lable">{{ field.label_tag }}</label>
-                                    <tr>
-                                    <td>{{ field }}</td>
-                                    </tr>
-                                    {% endfor %}
-                                    </table>  
-                                        <br>
-                                    <button class="btn btn-primary" type="submit">Register!</button>
+                             <h3>Register for notTwitter</h3>
+                                <form action="{% url 'signup'  %}" method="POST">
+                                       {% csrf_token %}
+                                        <input name="Username" class="form-control" type="text" placeholder="Username" ></input>
+                                        <input name="Email" class="form-control" type="text" placeholder="Email Address"></input>
+                                        <input name="Password" class="form-control" type="text" placeholder="Password"></input>
+                                        <input name="password2" class="form-control" type="text" placeholder="Confirm Password"></input>
+                                        <input type="submit" value="Register" class="btn btn-primary" style="margin-top:10px">
+                                </form>
                         <br>
-                        <br>
-                                        
-                <a class="btn" href="{% url 'signin' %}">Cancel and Return to Login</a>
+                <a class="btn" href="{% url 'signup' %}">Cancel and Return to </a>
 
                 </div>
                 <div class="col-md-2"></div>

@@ -1,6 +1,6 @@
 
 from django import forms
-from TwitterApp.models import *
+from twit.models import *
 from models import *
 from django.conf import settings
 import datetime
@@ -14,12 +14,9 @@ class RegisterForm(forms.ModelForm):
         'duplicate_username': "A user with that username already exists.",
         'password_mismatch': "The two password fields didn't match.",
     }
-    username = forms.RegexField(label=_("Username"), max_length=30, help_text=_("Required. 30 characters or fewer."))
-    password1 = forms.CharField(label=_("Password"),
-        widget=forms.PasswordInput)
-    password2 = forms.CharField(label=_("Password confirmation"),
-        widget=forms.PasswordInput,
-        help_text=_("Enter the same password as above, for verification."))
+    username = forms.RegexField(label="Username", max_length=30)
+    password1 = forms.CharField(label="Password", widget=forms.PasswordInput)
+    password2 = forms.CharField(label="Password confirmation", widget=forms.PasswordInput, help_text="Enter the same password as above, for verification.")
 
     class Meta:
         model = User
