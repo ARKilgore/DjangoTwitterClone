@@ -46,6 +46,11 @@ def authorize(request):
         context['errors'] = 'Username or Password is incorrect. Try again'
         return render(request, 'twit/login.html', context)
 
+def leave(request):
+    context = {}
+    logout(request)
+    return render(request, 'twit/login.html', context)
+
 def register(request):
     context = {}
     return render(request, 'twit/registration.html', context)

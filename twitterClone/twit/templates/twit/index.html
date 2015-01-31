@@ -27,6 +27,9 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-8"style="text-align:center">
                         <h1>Welcome to notTwitter</h1>
+                    <br>
+                                <a href="{% url 'leave' %}" class="btn btn-primary">Logout</a>
+                    <br>
                                 <form action="{% url 'tweet'  %}" method="POST">
                                        {% csrf_token %}
                                         <input name="twit_text" class="form-control" type="text" placeholder="tweet" ></input>
