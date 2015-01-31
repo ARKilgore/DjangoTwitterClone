@@ -37,7 +37,7 @@
                                      {% else %}
                                         <br>
                                     {% endif %}
-                                    <form action="{% url 'login'  %}" method="POST">
+                                    <form action="{% url 'authorize'  %}" method="POST">
                                        {% csrf_token %}
                                         <input name="user_name" class="form-control" type="text" placeholder="Username" ></input>
                                         <input name="password" class="form-control" type="password" placeholder="Password"></input>

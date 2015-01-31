@@ -4,7 +4,6 @@ from django.core.urlresolvers import reverse
 from django.utils import timezone
 from twit.models import Tweet
 from django.template import RequestContext, loader
-from django.contrib.auth import authenticate, login
 from django.contrib.auth import authenticate, login, logout, get_user
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
@@ -34,10 +33,12 @@ def index(request):
     context = {}
     return render(request, 'twit/login.html', context)
 
-def login(request):
+def authorize(request):
     context = {}
     user = authenticate(username=request.POST.get('user_name',False), password=request.POST.get('password',False))
     if user is not None:
+        login(request, user)
+        context['user'] = username=request.POST.get('user_name',False)
         twit_list = Tweet.objects.order_by('-date')[:10]
         context = { 'twit_list' : twit_list }
         return render(request, 'twit/index.html', context)
@@ -46,10 +47,24 @@ def login(request):
         return render(request, 'twit/login.html', context)
 
 def register(request):
-    return render(request, 'twit/registration.html')
+    context = {}
+    return render(request, 'twit/registration.html', context)
 
 def signup(request):
     context = {}
+    if User.objects.filter(username=request.POST.get('Username',False)).exists():
+        context['errors'] = 'This username is taken'
+        return render(request, 'twit/registration.html', context)
+    context['username'] = request.POST.get('Username',False)
+    if User.objects.filter(email=request.POST.get('Email',False)).exists():
+        context['errors'] = 'A user with this email already exists'
+        return render(request, 'twit/registration.html', context)
+    context['email'] = request.POST.get('Email',False)
+    pass1 = request.POST.get('Password',False)
+    pass2 = request.POST.get('password2',False)
+    if pass1 != pass2:
+        context['errors'] = 'Passwords do not match'
+        return render(request, 'twit/registration.html', context)
     user = User.objects.create_user(request.POST.get('Username',False), request.POST.get('Email',False), request.POST.get('Password',False))
     user.save()
     return render(request, 'twit/login.html', context)
