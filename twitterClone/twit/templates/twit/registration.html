@@ -10,46 +10,51 @@
 <body>
 <!--HEADER-->
         
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color:4C1A1A">
                 <div class = "container">
                         <div class = ".navbar-header">
-                                <a class="navbar-brand" >R/M</a>
-                        </div>
-
-                                <div class = "navbar-header navbar-right">
-                                        <a class="navbar-brand"href="https://github.com/ARKilgore/DjangoTwitterClone">notTwitter</a>
-					</div>
+                                <a class="navbar-brand"href="https://github.com/ARKilgore/DjangoTwitterClone" style="color:white">notTwitter</a>
                         </div>
                 </div>
         </nav>
 <!--END HEADER-->
 
         <div class="content container" style="margin-top:50px" >
-                <div class="col-md-2"></div>
-                <div class="col-md-8"style="text-align:center">
-                        <h1>Welcome to notTwitter</h1>
-                    <br>
-                             <h3>Register for notTwitter</h3>
-                                    <br>
+                <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8"style="text-align:center">
+                                <div class="page-header">
+                                        <h1>Register for notTwitter</h1>
+                                </div>
+                        </div>
+                                     
+                        <div class="col-md-2"></div>
+                </div>
+                <div class="row">
                                     <br>
                                      {% if errors %}
                                         {{ errors }}
                                      {% else %}
                                         <br>
                                     {% endif %}
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
                                 <form action="{% url 'signup'  %}" method="POST">
                                        {% csrf_token %}
-                                        <input name="Username" class="form-control" type="text" placeholder="Username" ></input>
-                                        <input name="Email" class="form-control" type="text" placeholder="Email Address"></input>
-                                        <input name="Password" class="form-control" type="password" placeholder="Password"></input>
-                                        <input name="password2" class="form-control" type="password" placeholder="Confirm Password"></input>
-                                        <input type="submit" value="Register" class="btn btn-primary" style="margin-top:10px">
+                                        <label for="user_name_field">Username</label>
+                                        <input name="Username" id="user_name_field" class="form-control" type="text" placeholder="What should we call you?" ></input>
+                                        <label for="user_name_field" style="margin-top:10px">Email</label>
+                                        <input name="Email" class="form-control" type="text" placeholder="How can we reach you?"></input>
+                                        <label for="user_name_field" style="margin-top:10px">Password</label>
+                                        <input name="Password" class="form-control" type="password" placeholder="How do we know it's you?"></input>
+                                        <label for="user_name_field" style="margin-top:10px">Confirm Password</label>
+                                        <input name="password2" class="form-control" type="password" placeholder="Just to be safe"></input>
+                                        <div style="text-align:center"><input type="submit" value="Register!" class="btn btn-primary" style="margin-top:10px"></div>
                                 </form>
+                                <div style="text-align:center"><a class="btn btn-sm btn-default" href="{% url 'authorize' %}">Cancel and Return to Login</a></div>
+                        </div>
                         <br>
-
-
-                <a class="btn" href="{% url 'authorize' %}">Cancel and Return to Login</a>
-
+                </div>
                 </div>
                 <div class="col-md-2"></div>
                 </div>
