@@ -54,10 +54,10 @@
                                             {% endif %}
                                             <form action="{% url 'authorize'  %}" method="POST">
                                                {% csrf_token %}
-                                                <label for="user_name_field">Username</label>
-                                                <input name="user_name" id="user_name_field" class="form-control" type="text" placeholder="Enter username" ></input>
-                                                <label for="password_field" style="margin-top:10px">Password</label>
-                                                <input name="password" id="password_field" class="form-control" type="password" placeholder="Enter password"></input>
+                                                <label for="user_name">Username</label>
+                                                <input name="user_name" id="user_name" class="form-control" type="text" placeholder="Enter username" ></input>
+                                                <label for="password" style="margin-top:10px">Password</label>
+                                                <input name="password" id="password" class="form-control" type="password" placeholder="Enter password"></input>
                                                 <div style="text-align:center"><input type="submit" value="Login" class="btn btn-primary" style="margin-top:10px">
                                             </form>
                                                 <br>
