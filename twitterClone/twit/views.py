@@ -10,25 +10,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.shortcuts import get_object_or_404
 
-'''def auth_login(request):
-    context = {}
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-    else:
-        form = LoginForm()
-    if form.is_valid() and 'email' in form.cleaned_data and 'password' in form.cleaned_data:
-        user = authenticate(username=form.cleaned_data['email'], password=form.cleaned_data['password'])
-        if user is not None:
-            login(request, user)
-            return HttpResponseRedirect(reverse('index'))  # Redirect to homepage when the user logs in
-        else:
-            context['errors'] = 'Authentication failed.'
-    context['form'] = form
-    return render_to_response('twit/signin.html', context, context_instance=RequestContext(request))
-'''
-
-
-
 def index(request):
     context = {}
     return render(request, 'twit/login.html', context)
@@ -57,6 +38,7 @@ def register(request):
 
 def signup(request):
     context = {}
+    username=request.POST.get('Username',False)
     if User.objects.filter(username=request.POST.get('Username',False)).exists():
         context['errors'] = 'This username is taken'
         return render(request, 'twit/registration.html', context)
@@ -72,6 +54,7 @@ def signup(request):
         return render(request, 'twit/registration.html', context)
     user = User.objects.create_user(request.POST.get('Username',False), request.POST.get('Email',False), request.POST.get('Password',False))
     user.save()
+    context = {}
     return render(request, 'twit/login.html', context)
 
 '''def signup(request):
